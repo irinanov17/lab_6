@@ -40,39 +40,6 @@ public class FlatFigure {
     }
 
     public double area() {
-        double s=0;
-        if (isTriangle()) {
-            return getAreaForTriangle();
-        }
-        else s = getAreaForRectangle();
-
-        return s;
-    }
-
-    private double getAreaForTriangle() {
-        if (al==90) return 0.5*a*b;
-        else {
-            double p=(a+b+c)/2;
-            return Math.sqrt(p*(p-a)*(p-b)*(p-c));
-        }
-    }
-
-    private double getAreaForRectangle() {
-        if (isRectangle()) { return getAreaForSquare(); }
-        else { return getAreaForParallelogram(); }
-    }
-
-    private  double getAreaForParallelogram(){
-        return  a*b*Math.sin(al*Math.PI/180);
-    }
-
-    private  double getAreaForSquare() { return a*b;}
-
-    private boolean isTriangle() {
-        return d==0;
-    }
-
-    private boolean isRectangle() {
-        return al==90 && bet==90 && a==c && b==d;
+       return FFHelp.area(this);
     }
 }
