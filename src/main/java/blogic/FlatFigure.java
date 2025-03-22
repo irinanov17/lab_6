@@ -31,26 +31,48 @@ public class FlatFigure {
         this.b = b;
         this.c = a;
         this.d = b;
-        if (alfa+betta==180) 
-                System.out.println("ok Parallelogram");
+        if (alfa+betta==180)
+            System.out.println("ok Parallelogram");
         else    System.out.println("bad Parallelogram");
-        
+
         this.al= alfa;
         this.bet=betta;
     }
-    
+
     public double area() {
         double s=0;
-        if (d==0) {
-            if (al==90) s=0.5*a*b;
-            else {
-                double p=(a+b+c)/2;
-                s=Math.sqrt(p*(p-a)*(p-b)*(p-c));
-            }
+        if (isTriangle()) {
+            return getAreaForTriangle();
         }
-        else if (al==90 && bet==90 && a==c && b==d) { s=a*b; }
-             else { s=a*b*Math.sin(al*Math.PI/180); }
-            
+        else s = getAreaForRectangle();
+
         return s;
+    }
+
+    private double getAreaForTriangle() {
+        if (al==90) return 0.5*a*b;
+        else {
+            double p=(a+b+c)/2;
+            return Math.sqrt(p*(p-a)*(p-b)*(p-c));
+        }
+    }
+
+    private double getAreaForRectangle() {
+        if (isRectangle()) { return getAreaForSquare(); }
+        else { return getAreaForParallelogram(); }
+    }
+
+    private  double getAreaForParallelogram(){
+        return  a*b*Math.sin(al*Math.PI/180);
+    }
+
+    private  double getAreaForSquare() { return a*b;}
+
+    private boolean isTriangle() {
+        return d==0;
+    }
+
+    private boolean isRectangle() {
+        return al==90 && bet==90 && a==c && b==d;
     }
 }
